@@ -8,7 +8,42 @@
     <link rel="stylesheet" href="bootstrap.min.css">
 </head>
 <body>
-    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <select id="recipe" class="form-control">
+                    <option value="" disabled selected>Choose Recipe</option>
+                    <option value="0" id="nomPom">Nom Pom</option>
+                    <option value="1">Chocolate cake</option>
+                    <option value="2">Avocado Shake(Toek KaLok)</option>
+                </select>
+
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <!-- <form action="#">
+                        <div class="input-group mb-3">
+                            <input type="number" id="members" class="form-control" placeholder="Members.." min="1" max="15">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" type="button">Add Member</button>
+                        </div>
+                    </div>
+                </form> -->
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-borderless" id="result"></table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/project.js"></script>
 </body>
