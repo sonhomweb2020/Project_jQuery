@@ -1,82 +1,135 @@
-//get nomPom
-$(document).ready(()=>{
-    $('#recipe').on('change',()=>{
-        var fruit = $('#recipe').val();
-        console.log(fruit);
-        choose(fruit);
-    });
-})
-//get data
-function getDefaultRecipe() {
-    $.ajax({
-        dataType: 'json',
-        url: getUrl(),
-        success: (data) => defaultRecipe(data),
-        error: () => getError(),
-    });
-}
 
-function defaultRecipe(myData) {
-    var result = "";
-    myData.recipes.forEach( recipe => {
-        defaultIngredient(recipe.ingredients);
-        result += `
-            <tr>
-                <td><img src="${recipe.iconUrl}" width="100"></td>
-                <td>${recipe.name}</td>
-                <td>${recipe.nbGuests}</td>
-            </tr>
-        `;
-    });
-    printData("recipe",result);
-}
-//get data from url
-function getUrl() {
+$(document).ready(function () {
+    $('#recipe').on('change', () => {
+        var dataRecipe = $('#recipe').val();
+        choose(dataRecipe);
+    })
+})
+
+function getUrl(){
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
     return url;
 }
-var choose = (data)=>{
-    switch (parseInt(data)){
+var choose = (menu) => {
+    switch (parseInt(menu)) {
+
         case 1:
-            NomPom();
+                getToekKaLok();
             break;
         case 2:
-            chocolateCake();
+                getAvocado();
             break;
-        case 3 :
-            avocadoShake();
-            break;
+
     }
 }
 
-//get NomPom
-var NomPom=(nom)=>{
-    var nomPom =  "";
-    nom.recipes.forEach(element => {
-        nomPom = `
-            ${element.name}
-        `;
+//function get data Toek kalok
+var getToekKaLok = () => {
+    
+    $.ajax({
+        dataType: 'json',
+        url: getUrl(),
+        success: function (datas) {
+            var result = "";
+            datas.recipes.forEach(element => {
+                if (element.id == 1) {
+                    result += `
+                        <img src="${element.iconUrl}" width="100">
+                `;
+                }
+
+            });
+            $('#image').html(result);
+            var resultes = "";
+            datas.recipes.forEach(elements => {
+                elements.ingredients.forEach(el => {
+                    if (elements.id == 1) {
+                        resultes += `
+                          <tr>
+                            <td><img src="${el.iconUrl}" width="50"></td>
+                            <td>${el.quantity}</td>
+                            <td>${el.unit[0]}</td>
+                            <td>${el.name}</td>
+                          </tr>
+                    `;
+                    }
+                })
+            });
+            $('#result').html(resultes);
+        }
+    })
+}
+// function get avocado
+var getAvocado = () => {
+    $.ajax({
+        dataType: 'json',
+        url: getUrl(),
+        success: function (datases) {
+            var archive = "";
+            datases.recipes.forEach(items => {
+                if (items.id == 0) {
+                    archive += `
+                    
+                    <div class="row">
+                    <h1>${items.name}</h1>
+                    <img src="${items.iconUrl}" width="100" margin-right: "100px;">
+                   
+                    </div>
+                `;
+                }
+
+            });
+            $('#image').html(archive);
+            var getValue = "";
+            datases.recipes.forEach(item => {
+                item.ingredients.forEach(el => {
+                    if (item.id == 0) {
+                        getValue += `
+                          <tr>
+                            <td><img src="${el.iconUrl}" width="50"></td>
+                            <td>${el.quantity}</td>
+                            <td>${el.unit[0]}</td>
+                            <td>${el.name}</td>
+                          </tr>
+                    `;
+                    }
+                })
+            });
+            $('#result').html(getValue);
+        }
+    })
+}
+$(document).ready(function () {
+    $('#add').on('click', function () {
+        var adds = $('#inputMenu').val();
+        addPerson(adds);
     });
-    printData(nomPom);
+    //  Decrease number in input
+    $('#decrease').on('click', function () {
+        var decreases = $('#inputMenu').val();
+        decreasePerson(decreases);
+    })
+})
+// funtion of  increase number in input
+function addPerson(add) {
+    var sum = parseInt(add) + 1;
+    if (sum <= 15) {
+        $('#inputMenu').val(sum);
+        addMulti(sum);
+    }
 }
+// function of  Decrease number in input
+function decreasePerson(decreas) {
 
+    var decreasese = parseInt(decreas) - 1;
+    if (decreasese >= 0) {
+        $('#inputMenu').val(decreasese);
+        addMulti(decreasese);
 
-//get chocolateCake
-
-var chocolateCake= ()=>{
-    var chocolate = "chocolateCake";
-    printData(chocolate);
+    }
 }
-
-//get avocadoShake
-
-var avocadoShake = () =>{
-    var toekKalok = "avocadoShake";
-    printData(toekKalok);
-}
-
-//Print out to HTML
-
-var printData = (out) =>{
-    $('#result').html(out);
+// function of multi data
+function addMulti(multi) {
+    var compute = multi * 5;
+    $('#results').html(compute);
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Project jQuery</title>
     <link rel="stylesheet" href="bootstrap.min.css">
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row">
@@ -14,37 +16,50 @@
             <div class="col-4">
                 <select id="recipe" class="form-control">
                     <option value="" disabled selected>Choose Recipe</option>
-                    <option value="0" id="nomPom">Nom Pom</option>
                     <option value="1">Chocolate cake</option>
                     <option value="2">Avocado Shake(Toek KaLok)</option>
                 </select>
-
             </div>
             <div class="col-4"></div>
         </div>
-    </div>
-    <div class="container mt-5">
-        <div class="row">
+
+        <div class="row" style="margin-right: 100px;">
             <div class="col-3"></div>
-            <div class="col-6">
-                <!-- <form action="#">
-                        <div class="input-group mb-3">
-                            <input type="number" id="members" class="form-control" placeholder="Members.." min="1" max="15">
-                        <div class="input-group-append">
-                            <button class="btn btn-success" type="button">Add Member</button>
-                        </div>
+            <div class="col-3"></div>
+            <div class="col-3" id="image" style="margin-top: 50px;"></div>
+            <div class="col-3"></div>
+        </div>
+        </div <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-primary" type="button" id="decrease">-</button>
                     </div>
-                </form> -->
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table table-borderless" id="result"></table>
+                    <input type="text" class="form-control text-center" disabled value="0" id="inputMenu">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit" id="add">+</button>
                     </div>
-                </div>
-            </div>
             </div>
         </div>
+        <div class="col-4"></div>
+    </div>
+    <!-- div output data on html -->
+    <div id="results"></div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-borderless" id="result"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/project.js"></script>
 </body>
+
 </html>
