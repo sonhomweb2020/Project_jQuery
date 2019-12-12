@@ -27,7 +27,7 @@ function chooseRecipe(recipe){
         option +=`
             <option value ="${element.id}">${element.name}</option>
         `;
-        console.log(element);
+
     });
     $('#recipe').append(option);
 }
@@ -35,10 +35,13 @@ function chooseRecipe(recipe){
 function getRecipe(recipeId){
    allData.forEach(item =>{
       if(item.id ==recipeId){
-          //show name and iconUrl
+          //functon show name and iconUrl
          showrecipe(item.name,item.iconUrl);
-         //increadia
+         //function ingreadient
          showIngredient(item.ingredients);
+         // function cut step
+         cuteStep(item.instructions);
+
       }
    })
 }
@@ -55,11 +58,30 @@ function showrecipe(name ,image){
         </div>
     <div class="col-2"></div>
     `;
-
     $('#recipe-result').html(result);
 }
+
+// function cut step
+function cuteStep(step){
+    var cute = "";
+    var steps = step.split('<step>');
+    for( let i=1 ; i<steps.length;i++){
+        var contruction = `
+            <h4>Instructions</h4>
+        `;
+        cute +=`
+            Step ${i} :
+           <li class="list-group-item" style="border:none;">${steps[i]}</li>
+        `;
+    }
+    $('#con').html(contruction);
+    $('#cut-step').html(cute);
+} 
 function showIngredient(img){
     var results = "";
+    var ingredient = `
+        <h4>Ingredients</h4>
+    `;
     img.forEach(el=>{
             results += `
                 <tr>
@@ -68,8 +90,8 @@ function showIngredient(img){
                     <td>${el.unit[0]}</td>
                     <td>${el.name}</td>
                 </tr>
-             `;
-         
-    })
+            `;
+    });
+    $('#ingredients').html(ingredient);
     $('#result-ingredient').html(results);
 }
