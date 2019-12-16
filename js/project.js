@@ -41,6 +41,9 @@ function getRecipe(recipeId){
          showIngredient(item.ingredients);
          // function cut step
          cuteStep(item.instructions);
+         //quantity member 
+         quantity();
+
 
       }
    })
@@ -94,4 +97,39 @@ function showIngredient(img){
     });
     $('#ingredients').html(ingredient);
     $('#result-ingredient').html(results);
+}
+function quantity(){
+    var button = `
+    <div class="col-4" id="member">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button class="btn btn-primary" type="button" id="decrease">-</button>
+            </div>
+            <input type="text" class="form-control text-center" disabled value="0" id="inputMenu">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit" id="add">+</button>
+            </div>
+        </div>
+    </div>
+    `;
+    $('#in').html(button);
+}
+$(document).ready(function(){
+    $('#decrease').on('click',function(){
+        var Value = $('#inputMenu').val();
+        // console.log(Value);
+        minus(Value);
+      
+    })
+})
+function minus(){
+    var numbermin = parseInt(min)-1;
+    if(numbermin >=0){
+        $('#inputMenu').val(numbermin);
+        numbermin = `
+            ${quantity}
+        `;
+    }
+    results (numbermin);
+    // $('#result').html(numbermin);
 }
