@@ -1,60 +1,94 @@
-function getUrl(){
+function getUrl() {
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
     return url;
 }
-$(document).ready(function(){
+$('#card1').hide();
+$('#card2').hide();
+$('#members').hide();
+$(document).ready(function () {
     requesApi();
-    $('#recipe').on('change',()=>{
+    $('#recipe').on('change', () => {
         var recipes = $('#recipe').val();
         getRecipe(recipes);
-        // choose(recipes);
-    })
+        $('#members').show();
+        $('#card1').show();
+        $('#card2').show();
+    });
+    $('#decrease').on('click', function () {
+        decrease();
+        var guest = $('#inputMenu').val();
+        var recipe = $('#recipe').val();
+         updateRecipe(recipe,guest);
+      });
+    
+      $('#add').on('click', function () {
+        increase();
+        var guest = $('#inputMenu').val();
+        var recipe = $('#recipe').val();
+         updateRecipe(recipe,guest);
+      });
+
 })
-function requesApi(){
+
+//reques api
+function requesApi() {
     $.ajax({
-        dataType:'json',
-        url:getUrl(),
-        success:(data)=>chooseRecipe(data.recipes),
-        error:()=>console.log('cannot get data'),
+        dataType: 'json',
+        url: getUrl(),
+        success: (data) => chooseRecipe(data.recipes),
+        error: () => console.log('cannot get data'),
     })
 }
-var allData =[];
 
-function chooseRecipe(recipe){
+var allData = [];
+function chooseRecipe(recipe) {
     allData = recipe;
     var option = "";
     recipe.forEach(element => {
-        option +=`
+        option += `
             <option value ="${element.id}">${element.name}</option>
         `;
 
     });
     $('#recipe').append(option);
 }
-//get id
-function getRecipe(recipeId){
-   allData.forEach(item =>{
-      if(item.id ==recipeId){
-          //functon show name and iconUrl
-         showrecipe(item.name,item.iconUrl);
-         //function ingreadient
-         showIngredient(item.ingredients);
-         // function cut step
-         cuteStep(item.instructions);
-         //quantity member 
-         quantity();
-
-
-      }
-   })
+var newIngredient = [];
+var oldnbGuests = "";
+//get recipe and call function
+function getRecipe(recipeId) {
+    allData.forEach(item => {
+        if (item.id == recipeId) {
+            //functon show name and iconUrl
+            showrecipe(item.name, item.iconUrl);
+            //function ingreadient
+            showIngredient(item.ingredients);
+            //function cut step
+            cutStep(item.instructions);
+            //new ingredients
+            $('#inputMenu').val(item.nbGuests);
+            guestold = $('#inputMenu').val();
+        }
+    })
 }
+//function updateRecipe new
+function updateRecipe(recipeId,member){
+    allData.forEach(item =>{
+        if(item.id == recipeId){  
+            showrecipe(item.name,item.iconUrl);
+            updateIngredient(item.ingredients,member);
+            cutStep(item.instructions);
+            $('#inputMenu').val(member);
+        }  
+    });
+  }
 //get name and iconUrl
-function showrecipe(name ,image){
-    var result ="";
+function showrecipe(name, image) {
+    var result = "";
     result = `
     <div class="col-2"></div>
      <div class="col-4">
             <h1>${name}</h1>
+            
         </div>
      <div class="col-4">
             <img src="${image}" width="150">
@@ -65,28 +99,32 @@ function showrecipe(name ,image){
 }
 
 // function cut step
-function cuteStep(step){
+function cutStep(step) {
     var cute = "";
     var steps = step.split('<step>');
-    for( let i=1 ; i<steps.length;i++){
+    for (let i = 1; i < steps.length; i++) {
         var contruction = `
             <h4>Instructions</h4>
         `;
-        cute +=`
-            Step ${i} :
+        cute += `
+            <li class="list-group-item text-primary" style="border:none;font-weight:600;font-size:20px;">
+            Step ${i}:
+            </li>
            <li class="list-group-item" style="border:none;">${steps[i]}</li>
         `;
     }
     $('#con').html(contruction);
     $('#cut-step').html(cute);
-} 
-function showIngredient(img){
+}
+
+//function show ingredient intable
+function showIngredient(img) {
     var results = "";
     var ingredient = `
         <h4>Ingredients</h4>
     `;
-    img.forEach(el=>{
-            results += `
+    img.forEach(el => {
+        results += `
                 <tr>
                     <td><img src="${el.iconUrl}" width="100"></td>
                     <td>${el.quantity}</td>
@@ -98,38 +136,49 @@ function showIngredient(img){
     $('#ingredients').html(ingredient);
     $('#result-ingredient').html(results);
 }
-function quantity(){
-    var button = `
-    <div class="col-4" id="member">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button class="btn btn-primary" type="button" id="decrease">-</button>
-            </div>
-            <input type="text" class="form-control text-center" disabled value="0" id="inputMenu">
-            <div class="input-group-append">
-                <button class="btn btn-success" type="submit" id="add">+</button>
-            </div>
-        </div>
-    </div>
-    `;
-    $('#in').html(button);
-}
-$(document).ready(function(){
-    $('#decrease').on('click',function(){
-        var Value = $('#inputMenu').val();
-        // console.log(Value);
-        minus(Value);
-      
-    })
-})
-function minus(){
-    var numbermin = parseInt(min)-1;
-    if(numbermin >=0){
-        $('#inputMenu').val(numbermin);
-        numbermin = `
-            ${quantity}
-        `;
+
+//function increase member
+function increase() {
+    var member = $('#inputMenu').val();
+  
+    var guest = parseInt(member) + 1;
+    if (guest <= 15) {
+        $('#inputMenu').val(guest);
     }
-    results (numbermin);
-    // $('#result').html(numbermin);
-}
+  
+  }
+
+//function decrease member
+function decrease() {
+    var member = $('#inputMenu').val();
+    var guest = parseInt(member) - 1;
+    if (guest >= 0) {
+        $('#inputMenu').val(guest);
+    }
+  }
+
+//   function add new ingredient
+  function updateIngredient (ing,guest) {
+    var ingredient = "";
+    ing.forEach(element => {
+        var {quantity,iconUrl,name,unit} = element;
+       var add = quantity * parseInt(guest)/ guestold;
+       ingredient += `
+       <tr>
+           <td><img src = "${iconUrl}" width = "80px"></td>
+           <td><span >${add }</span></td>
+           <td >${unit[0]}</td>
+           <td >${name}</td>
+       </tr>
+     `
+    })
+    $('#result-ingredient').html(ingredient);
+  } 
+
+
+
+
+
+
+
+
