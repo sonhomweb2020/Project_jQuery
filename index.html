@@ -11,15 +11,19 @@
         body {
             background-color: antiquewhite;
         }
-        h1   {color: blue;
-           
+
+        h1 {
+            color: blue;
         }
-        h4 {text-align: center}
-        h3 {color: blue;
-           
-        };
-       
-        </style>
+
+        h4 {
+            text-align: center
+        }
+
+        h3 {
+            color: blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,19 +40,20 @@
         <hr>
 
         <h1 class="display text-center"></h1>
-        <div class="row mt-5" id="recipe-result">
-            
-        </div>
+        <div class="row mt-5" id="recipe-result"></div>
+
         <div class="row mt-3" style="margin-left: 25%;" id="members">
-            <div class="col-4 "><div class="card">
-                <h3> Number of persons </h3>
-            </div></div>
+            <div class="col-4 ">
+                <div class="card">
+                    <h3> Number of persons </h3>
+                </div>
+            </div>
             <div class="col-4" id="member">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <button class="btn btn-primary" type="submit" id="decrease">-</button>
                     </div>
-                    <input type="text" id="inputMenu" class="form-control text-center" disabled value="0" >
+                    <input type="text" id="inputMenu" class="form-control text-center" disabled value="0">
                     <div class="input-group-append">
                         <button class="btn btn-success" type="submit" id="add">+</button>
                     </div>
@@ -56,7 +61,7 @@
             </div>
             <div class="col-4"></div>
         </div>
-        <div class="col-4"></div>
+
         <div class="row mt-5">
             <div class="col-6">
                 <div class="card" id="card1">
@@ -66,11 +71,11 @@
                 </div>
             </div>
             <div class="col-6">
-               <div class="card" id="card2">
-                <table class="table table-borderless" id="cut-step">
-                    <h4  id="con"></h4>
-                </table>
-               </div>
+                <div class="card" id="card2">
+                    <table class="table table-borderless" id="cut-step">
+                        <h4 id="con"></h4>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
