@@ -1,3 +1,4 @@
+// function getUrl
 function getUrl() {
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
     return url;
@@ -86,12 +87,13 @@ function showrecipe(name, image) {
     var result = "";
     result = `
     <div class="col-2"></div>
-     <div class="col-4">
-            <h1>${name}</h1>
-            
+        <div class="col-4">
+            <div class="card" id="getname">
+                <h1>${name}</h1>
+            </div>
         </div>
-     <div class="col-4">
-            <img src="${image}" width="150">
+     <div class="col-4 ">
+            <img src="${image}" width="150" class="img-fluid img-thumbnail">
         </div>
     <div class="col-2"></div>
     `;
@@ -140,7 +142,6 @@ function showIngredient(img) {
 //function increase member
 function increase() {
     var member = $('#inputMenu').val();
-  
     var guest = parseInt(member) + 1;
     if (guest <= 15) {
         $('#inputMenu').val(guest);
@@ -157,11 +158,11 @@ function decrease() {
     }
   }
 
-//   function add new ingredient
+//   function update data form ingredient
   function updateIngredient (ing,guest) {
     var ingredient = "";
     ing.forEach(element => {
-        var {quantity,iconUrl,name,unit} = element;
+       var {quantity,iconUrl,name,unit} = element;
        var add = quantity * parseInt(guest)/ guestold;
        ingredient += `
        <tr>
@@ -170,7 +171,7 @@ function decrease() {
            <td >${unit[0]}</td>
            <td >${name}</td>
        </tr>
-     `
+     `;
     })
     $('#result-ingredient').html(ingredient);
   } 
