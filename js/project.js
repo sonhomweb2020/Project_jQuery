@@ -1,3 +1,4 @@
+  
 // function getUrl
 function getUrl() {
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
@@ -41,6 +42,7 @@ function requesApi() {
     })
 }
 
+//function choose menu on recipe
 var allData = [];
 function chooseRecipe(recipe) {
     allData = recipe;
@@ -65,12 +67,13 @@ function getRecipe(recipeId) {
             showIngredient(item.ingredients);
             //function cut step
             cutStep(item.instructions);
-            //new ingredients
+            //new get old gues
             $('#inputMenu').val(item.nbGuests);
             guestold = $('#inputMenu').val();
         }
     })
 }
+
 //function updateRecipe new
 function updateRecipe(recipeId,member){
     allData.forEach(item =>{
@@ -82,6 +85,7 @@ function updateRecipe(recipeId,member){
         }  
     });
   }
+
 //get name and iconUrl
 function showrecipe(name, image) {
     var result = "";
@@ -93,30 +97,11 @@ function showrecipe(name, image) {
             </div>
         </div>
      <div class="col-4 ">
-            <img src="${image}" width="150" class="img-fluid img-thumbnail">
+            <img src="${image}" width="190" class="img-fluid img-thumbnail">
         </div>
     <div class="col-2"></div>
     `;
     $('#recipe-result').html(result);
-}
-
-// function cut step
-function cutStep(step) {
-    var cute = "";
-    var steps = step.split('<step>');
-    for (let i = 1; i < steps.length; i++) {
-        var contruction = `
-            <h4>Instructions</h4>
-        `;
-        cute += `
-            <li class="list-group-item text-primary" style="border:none;font-weight:600;font-size:20px;">
-            Step ${i}:
-            </li>
-           <li class="list-group-item" style="border:none;">${steps[i]}</li>
-        `;
-    }
-    $('#con').html(contruction);
-    $('#cut-step').html(cute);
 }
 
 //function show ingredient intable
@@ -137,6 +122,25 @@ function showIngredient(img) {
     });
     $('#ingredients').html(ingredient);
     $('#result-ingredient').html(results);
+}
+
+// function cut step
+function cutStep(step) {
+    var cute = "";
+    var steps = step.split('<step>');
+    for (let i = 1; i < steps.length; i++) {
+        var contruction = `
+            <h4>Instructions</h4>
+        `;
+        cute += `
+            <li class="list-group-item text-primary" style="border:none;font-weight:600;font-size:20px;">
+            Step ${i}:
+            </li>
+           <li class="list-group-item" style="border:none;">${steps[i]}</li>
+        `;
+    }
+    $('#con').html(contruction);
+    $('#cut-step').html(cute);
 }
 
 //function increase member
@@ -175,11 +179,3 @@ function decrease() {
     })
     $('#result-ingredient').html(ingredient);
   } 
-
-
-
-
-
-
-
-

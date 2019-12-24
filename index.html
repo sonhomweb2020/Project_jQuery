@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +10,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
+            background-image: url(images/background1.jpg);
+            background-size: cover;
             background-color: antiquewhite;
         }
-
         h1 {
             color:blue;
             background-color: white;
@@ -19,11 +21,9 @@
         #getname {
             float: right;
         }
-
         h4 {
             text-align: center;
         }
-
         h3 {
             color: blue;
         }
@@ -33,18 +33,19 @@
 
 <body>
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
+        <div class="row">   
+                <div class="col-sm-4" style="margin-top: -50px; width: 50px; height: 100px;"><img src="images/size200.png" alt=""> </div>
+            <div class="col-sm-4" style="margin-right: 200px;">   
                 <select id="recipe" class="form-control">
                     <option value="" disabled selected>Choose Recipe</option>
                 </select>
+                <hr>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-4">  </div>
         </div>
-        <hr>
+      
 
-        <div class="row mt-5" id="recipe-result"></div>
+        <div class="row" id="recipe-result"></div>
 
         <div class="row mt-3" style="margin-left: 25%;" id="members">
             <div class="col-sm-4 ">
@@ -52,7 +53,7 @@
                     <h3> Number of persons </h3>
                 </div>
             </div>
-            <div class="col-sm-4" id="member">
+            <div class="col-sm-3" id="member">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <button class="btn btn-primary" type="button" id="decrease">-</button>
@@ -63,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-7"></div>
         </div>
 
         <div class="row mt-5">
